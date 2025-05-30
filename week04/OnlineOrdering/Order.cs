@@ -1,7 +1,7 @@
 public class Order
 {
-    public List<Product> Products;
-    public Customer Customer;
+    private List<Product> Products;
+    private Customer Customer;
 
     public Order(Customer customer, List<Product> products)
     {
@@ -51,7 +51,7 @@ public class Order
         return $"Shipping Label:\nCustomer: {Customer.Name}\nAddress: {Customer.Address.FullAddress()}";
     }
 
-    
+
 
 
 

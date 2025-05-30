@@ -1,9 +1,9 @@
 public class Address
 {
-    public string Street;
-    public string City;
-    public string StateOrProvince;
-    public string Country;
+    public string Street { get; set; }
+    public string City { get; set; }
+    public string StateOrProvince { get; set; }
+    public string Country { get; set; }
 
     public Address(string street, string city, string stateOrProvince, string country)
     {
@@ -13,15 +13,12 @@ public class Address
         Country = country;
     }
 
-    // Returns true if the address is in the USA.
     public bool IsInUSA()
     {
-        // A case-insensitive check for "USA" or "United States" can be done here.
         return Country.Equals("USA", StringComparison.OrdinalIgnoreCase)
             || Country.Equals("United States", StringComparison.OrdinalIgnoreCase);
     }
 
-    // Returns a string representation of the address.
     public string FullAddress()
     {
         return $"{Street}\n{City}, {StateOrProvince}\n{Country}";

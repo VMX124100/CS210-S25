@@ -1,7 +1,7 @@
 public class Customer
 {
-    public string Name { get; }
-    public Address Address { get; }
+    public string Name;
+    public Address Address;
 
     public Customer(string name, Address address)
     {
