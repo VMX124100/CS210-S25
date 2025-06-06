@@ -1,9 +1,12 @@
-﻿class Program
+﻿using System;
+using System.Collections.Generic;
+
+class Program
 {
     static void Main(string[] args)
     {
         int userInput = 0;
-        Journal journal = new Journal();
+        Journal saveEntries = new Journal();
 
         do
         {
@@ -16,31 +19,28 @@
             switch (userInput)
             {
                 case 1:
-                    Prompt prompt = new Prompt();
-                    string promptToDisplay = prompt.GetRandomPrompt();
-                    Console.WriteLine(promptToDisplay);
+                    Prompt Prompt = new Prompt();
+                    string Prompt_to_Display = Prompt.GetRandomPromp();
+                    Console.WriteLine($"Your prompt is: {Prompt_to_Display}");
                     string userEntry = Console.ReadLine();
-                    journal.AddEntry(new Entry(promptToDisplay, userEntry));
-                    Console.WriteLine("");
+                    saveEntries.AddEntry(Prompt_to_Display, userEntry);
 
                     break;
 
                 case 2:
-                    Console.Clear();
-                    journal.DisplayAll();
+                    saveEntries.DisplayEntries();
                     break;
 
                 case 3:
                     Console.Write("Please enter your file name: ");
                     string filename = Console.ReadLine() + ".txt";
-                    journal.SaveToFile(filename);
+                    saveEntries.SaveToFile(filename);
                     break;
 
                 case 4:
                     Console.Write("Please enter your file name: ");
                     filename = Console.ReadLine() + ".txt";
-                    Console.Clear();
-                    journal.LoadFromFile(filename);
+                    saveEntries.LoadFromFile(filename);
                     break;
 
                 case 5:

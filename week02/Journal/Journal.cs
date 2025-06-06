@@ -1,45 +1,59 @@
+using System;
+using System.IO;
+
 public class Journal
 {
-    private List<Entry> _entries = new List<Entry>();
+    private string DateTime;
+    private string Prompt;
+    private string UserEntry;
+    public string CompleteEntry;
 
-    public void AddEntry(Entry newEntry)
+    private List<string> _savedEntries = new List<string>();
+
+    public void AddEntry(string prompt, string userEntry)
     {
-        _entries.Add(newEntry);
-
+        DateTime = System.DateTime.Now.ToString();
+        Prompt = prompt;
+        UserEntry = userEntry;
+        CompleteEntry = DateTime + "|" + Prompt + "|" + UserEntry;
+        _savedEntries.Add(CompleteEntry);
     }
 
-    public void DisplayAll()
+    public void DisplayEntries()
     {
 
-        foreach (Entry entry in _entries)
+        foreach (string entry in _savedEntries)
         {
-            entry.Display();
+            string[] entryParts = entry.Split('|');
+            Console.Write($"\nDate: {entryParts[0]}");
+            Console.WriteLine($" Prompt: {entryParts[1]}");
+            Console.WriteLine($" Entry: {entryParts[2]}");
         }
     }
+
 
 
     public void SaveToFile(string filename)
     {
         using (StreamWriter outputFile = new StreamWriter(filename))
         {
-            foreach (Entry entry in _entries)
+            foreach (string entry in _savedEntries)
             {
-                outputFile.WriteLine($"Date: {entry._date}, Prompt: {entry._prompt}");
-                outputFile.WriteLine($"Entry: {entry._userEntry}");
-                outputFile.WriteLine(""); 
+                outputFile.WriteLine(entry);
             }
         }
     }
 
-    public void LoadFromFile(string filename )
+    public void LoadFromFile(string filename)
     {
         if (File.Exists(filename))
         {
             string[] lines = File.ReadAllLines(filename);
+            _savedEntries = new List<string>();
 
             foreach (string line in lines)
-            {
-                Console.WriteLine(line);
+            {  
+                _savedEntries.Add(line);
             }
         }
         else
@@ -48,3 +62,4 @@ public class Journal
         }
     }
 }
+
